@@ -17,20 +17,25 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.template.loader import render_to_string
+from django.middleware.csrf import get_token
 
 class SeekerSigninView(APIView):
     
     def post(self, request):
-        print(request)
+
+        print(request.data)
         email = request.data.get('email')
         password = request.data.get('password')
 
         user = authenticate(request, email=email, password=password)
 
+        print(user)
+
         if user is not None:
             if user.is_seeker:
                 login(request, user)
-                return Response({'message': 'Signed in successfully'}, status=status.HTTP_200_OK)
+                csrf_token = get_token(request)
+                return Response({'message': 'Signed in successfully', 'csrf_token': csrf_token}, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'You are not authorized to sign in as an Job Seeker'}, status=status.HTTP_403_FORBIDDEN)
         else:

@@ -13,7 +13,7 @@ router.register(r'project', views.ProjectsView)
 router.register(r'employment_status', views.Employment_StatusView)
 router.register(r'experience', views.ExperienceView)
 router.register(r'qualification', views.QualificationView)
-router.register(r'jobseeker', views.Job_Seeker_CvView)
+router.register(r'cv', views.Job_Seeker_CvView)
 
 urlpatterns = [
 
