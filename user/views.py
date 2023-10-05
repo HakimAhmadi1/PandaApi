@@ -34,8 +34,8 @@ class SeekerSigninView(APIView):
         if user is not None:
             if user.is_seeker:
                 login(request, user)
-                csrf_token = get_token(request)
-                return Response({'message': 'Signed in successfully', 'csrf_token': csrf_token}, status=status.HTTP_200_OK)
+                sessionid = request.session.session_key
+                return Response({'message': 'Signed in successfully', 'sessionid': sessionid}, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'You are not authorized to sign in as an Job Seeker'}, status=status.HTTP_403_FORBIDDEN)
         else:
