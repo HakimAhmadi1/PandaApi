@@ -24,7 +24,7 @@ urlpatterns = [
     path('download_cv/<int:cv_id>',views.Download_CV.as_view(), name="download_cv"),
     path('create_employer', views.CreateEmployerView.as_view(), name="create_employer"),
     path('signin', views.SigninView.as_view(), name="employer_signin"),
-    path('signout', views.SigninView.as_view(), name="employer_signin"),
+    path('signout', views.SignoutView.as_view(), name="employer_signout"),
 
     path('password_change/', views.PasswordChangeView.as_view()),
     path('password_reset/', views.PasswordResetView.as_view()),
