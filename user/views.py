@@ -52,7 +52,12 @@ class Seeker_ProfileView(viewsets.GenericViewSet):
         user_profile = self.queryset.get(id=request.user.id)
         print("DB User", user_profile)
         serializer = self.get_serializer(user_profile)
-        return Response(serializer.data)
+        
+        
+        dic = serializer.data
+        dic['header'] = request.headers
+        return Response(dic)
+    
 
     @action(detail=False, methods=['PUT', 'PATCH'])
     def update_profile(self, request):
